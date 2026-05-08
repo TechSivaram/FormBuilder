@@ -1,4 +1,4 @@
-content = """# Multi-Lingual Rehabilitation SOAP Assessment Form
+# Multi-Lingual Rehabilitation SOAP Assessment Form
 
 A high-performance, dynamic form-building architecture built with **React**, **React Hook Form**, and **i18next**. This system is specifically designed for rehabilitation professionals (PT/OT) to conduct SOAP (Subjective, Objective, Assessment, Plan) evaluations with real-time support for multiple languages.
 
