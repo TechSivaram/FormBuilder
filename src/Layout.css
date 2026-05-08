@@ -1,0 +1,379 @@
+:root {
+  --primary: #1a73e8;
+  --error: #d93025;
+  --header-h: 64px;
+  --nav-w: 280px;
+  --bg: #f8f9fa;
+  --border: #dadce0;
+  --text-main: #3c4043;
+}
+
+/* --- Global Reset & Shell --- */
+* { 
+  box-sizing: border-box; 
+  -webkit-tap-highlight-color: transparent; 
+}
+
+html, body { 
+  margin: 0; 
+  padding: 0; 
+  height: 100vh; 
+  width: 100vw; 
+  overflow: hidden; 
+  font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+  background-color: var(--bg);
+}
+
+.app-shell { 
+  display: flex; 
+  flex-direction: column; 
+  height: 100vh; 
+  width: 100vw; 
+}
+
+/* --- Header (Horizontal Alignment Fix) --- */
+.app-header {
+  height: var(--header-h);
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  flex-shrink: 0;
+  z-index: 2001; 
+}
+
+.header-left, .header-right, .lang-wrapper { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+
+.brand { 
+  color: var(--primary); 
+  font-weight: 700; 
+  font-size: 1.2rem; 
+  display: flex; 
+  align-items: center; 
+  gap: 8px; 
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  border-radius: 4px;
+}
+
+.menu-btn:hover { background: #f1f3f4; }
+
+.lang-select { 
+  border: 1px solid var(--border); 
+  background: #f8f9fa; 
+  padding: 4px 8px; 
+  border-radius: 4px; 
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.account-icon { 
+  font-size: 32px; 
+  color: #5f6368; 
+}
+
+/* --- Sidebar & Main Content --- */
+.app-main { 
+  display: flex; 
+  flex: 1; 
+  overflow: hidden; 
+  position: relative; 
+}
+
+.side-nav {
+  width: var(--nav-w);
+  background: #ffffff;
+  border-right: 1px solid var(--border);
+  transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease;
+  flex-shrink: 0;
+  z-index: 2000;
+}
+
+.side-nav.closed { 
+  width: 0; 
+  opacity: 0; 
+  pointer-events: none; 
+}
+
+.nav-container { width: var(--nav-w); }
+
+.nav-label {
+  display: block;
+  padding: 24px 24px 8px 24px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #70757a;
+  text-transform: uppercase;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 16px;
+  cursor: pointer;
+  color: #5f6368;
+}
+
+.nav-item.active {
+  background: #e8f0fe;
+  color: var(--primary);
+  border-radius: 0 24px 24px 0;
+  margin-right: 8px;
+  font-weight: 600;
+}
+
+.main-content { 
+  flex: 1; 
+  background: var(--bg); 
+  overflow-y: auto; 
+  padding: 40px 24px; 
+}
+
+.content-container.fluid { 
+  width: 100%; 
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+/* --- Form Headers --- */
+.responsive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title-block h2 { margin: 0; font-size: 1.5rem; }
+.subtitle { margin: 4px 0 0; color: #5f6368; font-size: 0.9rem; }
+
+/* --- The Grid Fix (Alignment & Validation) --- */
+.input-group {
+  display: grid;
+  /* Fixes label width for long Telugu text */
+  grid-template-columns: minmax(180px, 220px) 1fr;
+  grid-template-areas: 
+    "label input"
+    ". error"; 
+  gap: 8px 24px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.input-group label { 
+  grid-area: label; 
+  font-weight: 600; 
+  padding-top: 10px; 
+  color: var(--text-main);
+}
+
+.input-group input, 
+.input-group textarea { 
+  grid-area: input; 
+  width: 100%; 
+  padding: 12px; 
+  border: 1px solid var(--border); 
+  border-radius: 6px; 
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.input-group textarea { resize: vertical; min-height: 100px; }
+
+/* Validation Visuals */
+.error-message {
+  grid-area: error;
+  color: var(--error);
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: -4px;
+}
+
+input.error-border, textarea.error-border { 
+  border-color: var(--error); 
+  background-color: #fff8f7; 
+}
+
+/* --- Checkbox & Radio Alignment --- */
+.checkbox-group,
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.checkbox-group label,
+.radio-group label {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0 !important;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 0;
+}
+
+.checkbox-group input[type="checkbox"],
+.radio-group input[type="radio"] {
+  width: auto;
+  min-width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  accent-color: var(--primary);
+}
+
+.checkbox-group input[type="checkbox"]:focus,
+.radio-group input[type="radio"]:focus {
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+  border-color: var(--primary);
+}
+
+/* --- Section Cards --- */
+fieldset.section-card {
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(60,64,67,0.1);
+}
+
+legend { 
+  color: var(--primary); 
+  font-weight: 700; 
+  padding: 0 10px; 
+  font-size: 1.1rem;
+}
+
+/* --- Buttons --- */
+.md-btn.primary {
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Loader Fix --- */
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 20px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--primary);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* --- MOBILE RESPONSIVE (iPhone SE) --- */
+@media (max-width: 768px) {
+  .side-nav {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    transform: translateX(-100%);
+    z-index: 3000;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.15);
+  }
+
+  .side-nav.open {
+    transform: translateX(0);
+    width: 280px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 2500;
+  }
+
+  .brand-text { display: none; } 
+
+  .main-content { padding: 20px 16px; }
+
+  .input-group {
+    grid-template-columns: 1fr;
+    grid-template-areas: "label" "input" "error";
+    gap: 4px;
+  }
+
+  .responsive-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .md-btn.primary { width: 100%; justify-content: center; }
+}
+
+/* Small spinner inside button */
+.spinner-small {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.md-btn.loading {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+/* Full screen overlay during Save */
+.save-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+/* Ensure the submit button doesn't jump when spinner appears */
+.md-btn {
+  min-width: 160px;
+  justify-content: center;
+}
